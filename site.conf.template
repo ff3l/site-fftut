@@ -1,0 +1,139 @@
+{
+	hostname_prefix = 'fftut-',
+	site_name = 'Freifunk Tuttlingen',
+	site_code = 'fftut',
+	opkg = {
+		openwrt = 'http://opkg.services.fftut/%n/%v/%S/packages',
+		extra = {
+			modules = 'http://opkg.services.fftut/modules/gluon-%GS-%GR/%S',
+		},
+	},
+
+	prefix4 = '10.30.128.0/20',
+	prefix6 = 'fdc7:5384:30::/64',
+
+	timezone = 'CET-1CEST,M3.5.0,M10.5.0/3', -- Europe/Berlin
+	ntp_servers = {'ntp1.fftut','ntp2.fftut','ntp3.fftut'},
+	regdom = 'DE',
+
+	wifi24 = {
+		channel = 1,
+		ap = {
+			ssid = 'Freifunk',
+		},
+		mesh = {
+			id = 'fftut-mesh',
+			mcast_rate = 12000,
+		},
+	},
+	wifi5 = {
+		channel = 44,
+		ap = {
+			ssid = 'Freifunk (5GHz)',
+		},
+		mesh = {
+			id = 'fftut-mesh',
+			mcast_rate = 12000,
+		},
+	},
+
+	next_node = {
+		ip4 = '10.30.128.1',
+		ip6 = 'fdc7:5384:30::1',
+		mac = '16:41:95:40:f7:dc',
+	},
+
+	fastd_mesh_vpn = {
+		methods = {'salsa2012+umac', 'salsa2012+gmac'},
+		enabled = false,
+		mtu = 1426,
+		groups = {
+			backbone = {
+				limit = 1,
+				peers = {
+					Gateway7 = {
+						key = '1a727c779fc18e57a5be4c23585f1498c627861cafdadc189457208cc1709aad',
+						remotes = {'ipv4 "gw7.fftut.de" port 11000'},
+					},
+					Gateway9 = {
+						key = '2a0ac1405fb9e031a08111318bfaef968e06231d55437bd993d209d496d3ba94',
+						remotes = {'ipv4 "gw9.fftut.de" port 11000'},
+					},
+				},
+			},
+		},
+		bandwidth_limit = {
+			-- The bandwidth limit can be enabled by default here.
+			enabled = false,
+			-- Default upload limit (kbit/s).
+			egress = 200,
+			-- Default download limit (kbit/s).
+			ingress = 3000,
+		},
+	},
+
+	autoupdater = {
+		enabled = 1,
+		branch = '---BRANCH---',
+		branches = {
+			stable = {
+				name = 'stable',
+				mirrors = {'http://upd1.fftut/stable/sysupgrade','http://upd2.fftut/stable/sysupgrade','http://upd3.fftut/stable/sysupgrade','http://upd4.fftut/stable/sysupgrade','http://upd.fftut.de/stable/sysupgrade'},
+				good_signatures = 2,
+				pubkeys = {
+                                        '0bee0e6e24a80f5ec4bb70ff76a0b9fb14b9568a5afcb1d618c835ba4ee878c8', -- Stefan
+                                        '15ec97109c57174940a0a932f60ba457987dd3564ca590381aac7f72de6ecec3', -- Pepto
+                                        '62025a10319278b2daec696889acacd0f0e935b491eb797e8fa5a272e3902c05', -- kpanic
+				},
+			},
+			beta = {
+				name = 'beta',
+				mirrors = {'http://upd1.fftut/beta/sysupgrade','http://upd2.fftut/beta/sysupgrade','http://upd3.fftut/beta/sysupgrade','http://upd4.fftut/beta/sysupgrade','http://upd.fftut.de/beta/sysupgrade'},
+				good_signatures = 2,
+				pubkeys = {
+                                        '0bee0e6e24a80f5ec4bb70ff76a0b9fb14b9568a5afcb1d618c835ba4ee878c8', -- Stefan
+                                        '15ec97109c57174940a0a932f60ba457987dd3564ca590381aac7f72de6ecec3', -- Pepto
+                                        '62025a10319278b2daec696889acacd0f0e935b491eb797e8fa5a272e3902c05', -- kpanic
+				},
+			},
+			experimental = {
+				name = 'experimental',
+				mirrors = {'http://upd1.fftut/experimental/sysupgrade','http://upd2.fftut/experimental/sysupgrade','http://upd3.fftut/experimental/sysupgrade','http://upd4.fftut/experimental/sysupgrade','http://upd.fftut.de/experimental/sysupgrade'},
+				good_signatures = 1,
+				pubkeys = {
+                                        '2623850bdd87944daea05533ab5fe33878f322932c2890bdc876859d2300b412', -- Jenkins
+                                        '0bee0e6e24a80f5ec4bb70ff76a0b9fb14b9568a5afcb1d618c835ba4ee878c8', -- Stefan
+                                        '15ec97109c57174940a0a932f60ba457987dd3564ca590381aac7f72de6ecec3', -- Pepto
+                                        '62025a10319278b2daec696889acacd0f0e935b491eb797e8fa5a272e3902c05', -- kpanic
+				},
+			},
+			 testing = {
+                                name = 'testing',
+                                mirrors = {'http://upd1.fftut/testing/sysupgrade','http://upd2.fftut/testing/sysupgrade','http://upd3.fftut/testing/sysupgrade','http://upd4.fftut/testing/sysupgrade','http://upd.fftut.de/testing/sysupgrade'},
+                                good_signatures = 1,
+                                pubkeys = {
+                                        '2623850bdd87944daea05533ab5fe33878f322932c2890bdc876859d2300b412', -- Jenkins
+                                        '0bee0e6e24a80f5ec4bb70ff76a0b9fb14b9568a5afcb1d618c835ba4ee878c8', -- Stefan
+                                        '15ec97109c57174940a0a932f60ba457987dd3564ca590381aac7f72de6ecec3', -- Pepto
+                                        '62025a10319278b2daec696889acacd0f0e935b491eb797e8fa5a272e3902c05', -- kpanic
+                                },
+                        },		
+		},
+	},
+
+  -- Node roles
+    roles = {
+     default = 'node',
+     list = {
+       'node',
+       'test',
+       'backbone',
+       'service',
+     },
+   },
+
+  -- Skip setup mode (config mode) on first boot
+  -- setup_mode = {
+  --  skip = true,
+  -- },
+}
