@@ -131,7 +131,11 @@
        'service',
      },
    },
-
+   mesh = {
+     batman_adv = {
+       gw_sel_class = 3,
+     },
+   } 
   -- Skip setup mode (config mode) on first boot
   -- setup_mode = {
   --  skip = true,

@@ -1,6 +1,5 @@
 GLUON_SITE_PACKAGES := \
 gluon-mesh-batman-adv-15 \
-gluon-alfred \
 gluon-respondd \
 gluon-autoupdater \
 gluon-config-mode-autoupdater \
@@ -45,10 +44,14 @@ endif
 
 
 
-DEFAULT_GLUON_RELEASE := 2016.1.5~$(shell date '+%Y%m%d')
+DEFAULT_GLUON_RELEASE := 2016.2~$(shell date '+%Y%m%d')
 
 # Allow overriding the release number from the command line
 GLUON_RELEASE ?= $(DEFAULT_GLUON_RELEASE)
+
+GLUON_REGION ?= eu
+
+GLUON_ATH10K_MESH ?= 11s
 
 GLUON_PRIORITY ?= 0
 
