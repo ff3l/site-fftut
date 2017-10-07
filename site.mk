@@ -10,20 +10,18 @@ gluon-config-mode-hostname \
 gluon-config-mode-mesh-vpn \
 gluon-ebtables-filter-multicast \
 gluon-ebtables-filter-ra-dhcp \
-gluon-luci-admin \
-gluon-luci-autoupdater \
-gluon-luci-portconfig \
-gluon-luci-wifi-config \
-gluon-luci-private-wifi \
-gluon-luci-node-role \
-gluon-next-node \
+gluon-web-admin \
+gluon-web-autoupdater \
+gluon-web-network \
+gluon-web-private-wifi \
+gluon-web-wifi-config \
 gluon-mesh-vpn-fastd \
 gluon-radvd \
 gluon-setup-mode \
 gluon-status-page \
 haveged \
 iptables \
-iwinfo 
+iwinfo
 
 ifeq ($(GLUON_TARGET),x86-generic)
 	GLUON_SITE_PACKAGES := $(GLUON_SITE_PACKAGES) \
@@ -42,17 +40,15 @@ ifeq ($(GLUON_TARGET),x86-64)
 	kmod-usb-net-asix
 endif
 
-
-
-DEFAULT_GLUON_RELEASE := 2016.2~$(shell date '+%Y%m%d')
-
-# Allow overriding the release number from the command line
-GLUON_RELEASE ?= $(DEFAULT_GLUON_RELEASE)
-
 GLUON_REGION ?= eu
 
 GLUON_ATH10K_MESH ?= 11s
 
+DEFAULT_GLUON_RELEASE := g$(shell git -C $(shell pwd) log --pretty=format:'%h' -n 1)+s$(shell git -C $(shell pwd)/site log --pretty=format:'%h' -n 1)~$(shell date '+%Y%m%d')
+
+# Allow overriding the release number from the command line
+GLUON_RELEASE ?= $(DEFAULT_GLUON_RELEASE)
+
 GLUON_PRIORITY ?= 0
 
-GLUON_LANGS ?= en de
+GLUON_LANGS ?= en de fr
